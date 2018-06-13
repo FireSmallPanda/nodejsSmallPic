@@ -1,9 +1,9 @@
 # nodejsSmallPic
 # 这是一个小相册系统
 ```
-git clone https://github.com/bailicangdu/vue2-elm.git  
+git clone https://github.com/FireSmallPanda/nodejsSmallPic.git
 
-cd vue2-elm
+cd nodejsSmallPic
 
 npm install  或 yarn(推荐)
 
