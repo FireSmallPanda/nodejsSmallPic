@@ -1,0 +1,72 @@
+html
+    head
+        title 小熊猫
+    
+    link(rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+    link( rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous")
+    script(src="js/jquery-3.3.1.min.js")
+    script(src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
+    script(src="view/index/main.js")
+    link(rel="stylesheet" href="view/index/main.css")
+
+    body
+        .top
+            nav.navbar.navbar-default
+                .container-fluid
+                    .navbar-header
+                        a.navbar-brand(href="#")
+                            img(alt="小小相册", src="/images/index/logo.jpg" style="width:20px;height:20px")
+                        a.navbar-brand(href="#") 熊猫哥的小小相册  
+                    #menu-title.collapse.navbar-collapse
+                        ul.nav.navbar-nav
+                            li.active
+                                a(href="/") 全部相册 
+                                    span.sr-only (current)         
+                            li
+                                a(href="/up") 上传
+                            li
+                                a( class ="deleteDoucument" ) 删除相册
+        .content
+            .row
+                - for (var i = 0; i < pictures.length; ++i) {
+                    - if ( pictures[i]!="tempUp" )
+                        .col-xs-6.col-md-3
+                            a.thumbnail(href="/"+pictures[i])
+                                img(src="/images/index/document.jpg", alt="...")
+                            h4.img-title #{pictures[i]}
+                - }
+                .col-xs-6.col-md-3
+                    a.thumbnail#addDoucument(href="#")
+                        img(src="/images/index/add.jpg", alt="...")
+                    h4.img-title 添加相册
+        .modal.fade.bs-example-modal#addDoucument-modal(tabindex="-1", role="dialog", aria-labelledby="mySmallModalLabel")
+            .modal-dialog(role="document")
+                .modal-content
+                    .modal-header
+                        h4 添加相册
+                    .modal-body
+                        form(action="/createDoucument", method="post" id="createDoucumentForm")                  
+                            .form-group
+                                label(for="name") 请输入相册名
+                                    input.form-control(type="text" name="doucumentName" id="doucumentName")
+                    .modal-footer
+                        button.btn.btn-primary(type="button" id="createDoucumentSubmit" ) 保存相册 
+                        button.btn.btn-default(type="button", data-dismiss="modal") 取消
+        .modal.fade.bs-example-modal#deleteDoucument-modal(tabindex="-1", role="dialog", aria-labelledby="mySmallModalLabel")
+            .modal-dialog(role="document")
+                .modal-content
+                    .modal-header
+                        h4 删除相册
+                    .modal-body
+                        form(action="/createDoucument", method="post" id="createDoucumentForm")                  
+                            .form-group
+                                label(for="delDoucument") 请选择删除的相册
+                                    select.form-control(name="delDoucument")
+                                        - for (var i = 0; i < pictures.length; ++i) {
+                                            - if ( pictures[i]!="tempUp" ) 
+                                                option(value=pictures[i]) #{pictures[i]}
+                                        -}              
+                    .modal-footer
+                        button.btn.btn-primary(type="button" id="deleteDoucumentSubmit" ) 删除相册 
+                        button.btn.btn-default(type="button", data-dismiss="modal") 取消         
+                        

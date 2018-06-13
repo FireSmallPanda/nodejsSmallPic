@@ -1,0 +1,36 @@
+html
+    head
+        title 小熊猫
+    link(rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+    link( rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous")
+    script(src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
+    script(src="js/jquery-3.3.1.min.js")
+    link(rel="stylesheet" href="view/index/main.css")
+    body
+        .top
+            nav.navbar.navbar-default
+                .container-fluid
+                    .navbar-header
+                        a.navbar-brand(href="#")
+                            img(alt="小小相册", src="/images/index/logo.jpg" style="width:20px;height:20px")
+                        a.navbar-brand(href="#") 熊猫哥的小小相册  
+                    #menu-title.collapse.navbar-collapse
+                        ul.nav.navbar-nav
+                            li
+                                a(href="/") 全部相册 
+                                    span.sr-only (current)         
+                            li
+                                a(href="/up") 上传
+            ol.breadcrumb
+                li
+                    a(href="/") 全部相册
+                li.active #{pictrueName}
+
+        .content
+            .row
+                - for (var i = 0; i < images.length; ++i) {
+                        .col-xs-6.col-md-3
+                            a.thumbnail(href="#")
+                                img(src="/"+pictrueName+"/"+images[i] alt="..." style="height:400px")
+                            h4.img-title #{images[i]}
+                - }  
